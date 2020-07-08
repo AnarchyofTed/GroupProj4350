@@ -3,3 +3,4 @@ def Employee():
 	print("Please Sign In")
 	Uname = input("UserName : ")
 	Pword = input("Password : ")
+	print("Welcome " + Uname + "!")
