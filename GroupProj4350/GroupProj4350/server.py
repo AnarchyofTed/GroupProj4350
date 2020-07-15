@@ -1,4 +1,5 @@
 import pypyodbc
+import pandas as pd
 
 class server():
     serverObject=None
@@ -28,6 +29,14 @@ class server():
         cursor.execute(order)
         for row in cursor:
             print(row)
+    
+    def loginCheck(self,order):
+        cursor = self.serverObject.cursor()
+
+        cursor.execute(order)
+        #query = pd.read_sql_query(order, self.serverObject)
+        return cursor
+
 
     #Ends Connection
     def endConnection(self):
@@ -36,7 +45,7 @@ class server():
 
 #This is a test function
 def test():
-    firstServer=server('DESKTOP-LPJK5QO\SCHOOL','Lego')
-    firstServer.command('SElECT * FROM Lego.dbo.customers')
-    firstServer.endConnection()
+    firstServer=server('Rxlbcoxlt\mssqlserver01','master')
+    #firstServer.command('SElECT * FROM master.dbo.customers')
+   # firstServer.endConnection()
 

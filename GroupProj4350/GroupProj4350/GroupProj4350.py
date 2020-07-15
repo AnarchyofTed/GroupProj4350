@@ -2,9 +2,10 @@ from customerFunction import *
 from employeeFunction import *
 from newUser import *
 from server import *
-serverName= input('Enter the server name: ')
-databaseName=input('Enter the database name: ')
-MainServer=server(serverName,databaseName)
+
+#serverName= input('Enter the server name: ')
+#databaseName=input('Enter the database name: ')
+MainServer=server('Rxlbcoxlt\mssqlserver01','master')
 while 1:
 	print("Please Sign In")
 	print("1. Customer (Online Mode)")
@@ -12,7 +13,11 @@ while 1:
 	print("3. Create New Customer (New Employees must be created by management)")
 	n = int(input())
 	if n is 1:
-		Customer()
+		print("Welcome to Lego Store Online")
+		print("Please Sign In")
+		Uname = input("UserName : ")		
+		Pword = input("Password : ")
+		customer = Customer(MainServer, Uname, Pword)
 
 
 	elif n is 2:
