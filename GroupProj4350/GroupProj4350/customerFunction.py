@@ -12,15 +12,16 @@ class Customer:
 
 	
 	def CustomerLogin(self, server):
-		s = server.loginCheck("SELECT * FROM customers WHERE customer_username= '%s'"% self.username)
-		cust = s.fetchone()
-		if s.description.__len__ is 0:
+		cust = server.loginCheck("SELECT * FROM customers WHERE customer_username= '%s'"% self.username)
+		cust = cust.fetchone()
+		if cust is None:
 			print("Invalid Username")
 		elif cust[5] != self.password:
-			print("password aint " + str(cust[5]))
+			print("Password and UserName Does Not Match!")
 		else:
 			print("Welcome " + cust[1] + "!")
 			self.id = str(cust[0])
-			
-		
+			self.name =str(cust[1])
+			self.preference=str(cust[3])
+			self.phone=emp[2]
 		

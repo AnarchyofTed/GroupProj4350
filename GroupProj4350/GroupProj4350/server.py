@@ -47,5 +47,5 @@ class server():
 def test():
     firstServer=server('Rxlbcoxlt\mssqlserver01','master')
     #firstServer.command('SElECT * FROM master.dbo.customers')
-   # firstServer.endConnection()
+    #firstServer.endConnection()
 
