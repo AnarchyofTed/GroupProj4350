@@ -5,8 +5,9 @@ from server import *
 
 serverName= input('Enter the server name: ')
 databaseName=input('Enter the database name: ')
-#MainServer=server('Rxlbcoxlt\mssqlserver01','master')
 MainServer=server(serverName, databaseName)
+##Blakes Test Function
+#MainServer=server('Rxlbcoxlt\mssqlserver01','master')
 while 1:
 	print("Please Sign In")
 	print("1. Customer (Online Mode)")
@@ -22,10 +23,15 @@ while 1:
 
 
 	elif n == 2:
-		Employee()
+		print("Employee's Offline Mode")
+		print("Please Sign In")
+		Uname = input("UserName : ")		
+		Pword = input("Password : ")
+		employee = Employee(MainServer, Uname, Pword)
+		
 
 	elif n == 3:		
-		NewUser()
+		NewUser(MainServer)
 
 	else:
 		print("Oops that's not an option!")

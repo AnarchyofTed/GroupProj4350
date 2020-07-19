@@ -24,11 +24,32 @@
     <Compile Include="customerFunction.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="databaseManagement.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="deliveryManagement.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="employeeFunction.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="employeeSale.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="GroupProj4350.py" />
+    <Compile Include="history.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="newUser.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="orderManagement.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="placeOrder.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="reportManagement.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="server.py">
