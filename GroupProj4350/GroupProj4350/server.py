@@ -33,7 +33,6 @@ class server():
         cursor = self.serverObject.cursor()
 
         cursor.execute(order)
-        #query = pd.read_sql_query(order, self.serverObject)
         return cursor
 
 
