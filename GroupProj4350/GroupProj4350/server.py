@@ -9,7 +9,7 @@ class server():
         #, hostName, databaseName, userName, serverPassword
         self.hostName=serverName
         self.databaseName=databaseName
-       # self.userName=userName
+        #self.userName=userName
         #self.serverPassword=serverPassword
         self.connect()
 
@@ -29,12 +29,22 @@ class server():
         for row in cursor:
             print(row)
     
-    def loginCheck(self,order):
+    def sqlInsert(self,order):
         cursor = self.serverObject.cursor()
+        cursor.execute(order)
+        self.serverObject.commit()
+        return cursor
 
+    def sqlSelect(self,order):
+        cursor = self.serverObject.cursor()
         cursor.execute(order)
         return cursor
 
+    def sqlSelectPrint(self,order):
+        cursor = self.serverObject.cursor()
+        cursor.execute(order)
+        return cursor
+       
 
     #Ends Connection
     def endConnection(self):
@@ -42,8 +52,8 @@ class server():
 
 
 #This is a test function
-def test():
-    firstServer=server('Rxlbcoxlt\mssqlserver01','master')
+#def test():
+   # firstServer=server('Rxlbcoxlt\mssqlserver01','master')
     #firstServer.command('SElECT * FROM master.dbo.customers')
     #firstServer.endConnection()
 

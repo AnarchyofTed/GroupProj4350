@@ -23,10 +23,15 @@ while 1:
 
 
 	elif n == 2:
-		Employee(MainServer, Uname, Pword)
+		print("Employee's Offline Mode")
+		print("Please Sign In")
+		Uname = input("UserName : ")		
+		Pword = input("Password : ")
+		employee = Employee(MainServer, Uname, Pword)
+		
 
 	elif n == 3:		
-		NewUser()
+		NewUser(MainServer)
 
 	else:
 		print("Oops that's not an option!")
