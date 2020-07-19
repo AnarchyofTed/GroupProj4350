@@ -3,11 +3,11 @@ from employeeFunction import *
 from newUser import *
 from server import *
 
-#serverName= input('Enter the server name: ')
-#databaseName=input('Enter the database name: ')
-#MainServer=server(serverName, databaseName)
+serverName= input('Enter the server name: ')
+databaseName=input('Enter the database name: ')
+MainServer=server(serverName, databaseName)
 ##Blakes Test Function
-MainServer=server('Rxlbcoxlt\mssqlserver01','master')
+#MainServer=server('Rxlbcoxlt\mssqlserver01','master')
 while 1:
 	print("Please Sign In")
 	print("1. Customer (Online Mode)")
