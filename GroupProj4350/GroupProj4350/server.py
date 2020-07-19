@@ -1,5 +1,4 @@
 import pypyodbc
-import pandas as pd
 
 class server():
     serverObject=None
