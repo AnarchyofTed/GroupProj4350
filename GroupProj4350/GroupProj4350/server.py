@@ -26,8 +26,7 @@ class server():
     def command(self,order):
         cursor = self.serverObject.cursor()
         cursor.execute(order)
-        for row in cursor:
-            print(row)
+ 
     
     def sqlInsert(self,order):
         cursor = self.serverObject.cursor()
