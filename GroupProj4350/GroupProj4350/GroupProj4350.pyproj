@@ -49,6 +49,9 @@
     <Compile Include="placeOrder.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Populate_Server.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="reportManagement.py">
       <SubType>Code</SubType>
     </Compile>
