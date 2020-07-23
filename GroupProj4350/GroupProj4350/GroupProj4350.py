@@ -10,11 +10,15 @@ while t==0:
 	databaseName=input('Enter a valid database name: ')
 
 	try:
-		MainServer=server(serverName, databaseName)
+		self.serverObject = pypyodbc.connect('Driver={SQL Server};'
+                                            'Server='+serverName+';'
+                                            'Database='+databaseName+';'
+                                            'Trusted_Connection=yes;')
 		t=1
 	except:
 		print("could not connect")
 		t=0
+MainServer=server(serverName, databaseName)
 first=input("Do you need to create the tables for the first time?y for yes, n for no: ")
 if first=='y' or first=='Y':
 	MakeDataBase(serverName,databaseName)
