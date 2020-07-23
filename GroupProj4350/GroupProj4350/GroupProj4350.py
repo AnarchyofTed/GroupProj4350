@@ -4,23 +4,23 @@ from newUser import *
 from server import *
 from Populate_Server import *
 
-#t=0
-#while t==0:
-#	serverName= input('Enter the server name: ')
-#	databaseName=input('Enter a valid database name: ')
+t=0
+while t==0:
+	serverName= input('Enter the server name: ')
+	databaseName=input('Enter a valid database name: ')
 
-#	try:
-#		MainServer=server(serverName, databaseName)
-#		t=1
-#	except:
-#		print("could not connect")
-#		t=0
-#first=input("Do you need to create the tables for the first time?y for yes, n for no: ")
-#if first=='y' or first=='Y':
-#	MakeDataBase(serverName,databaseName)
+	try:
+		MainServer=server(serverName, databaseName)
+		t=1
+	except:
+		print("could not connect")
+		t=0
+first=input("Do you need to create the tables for the first time?y for yes, n for no: ")
+if first=='y' or first=='Y':
+	MakeDataBase(serverName,databaseName)
 	
 ##Blakes Test Function
-MainServer=server('Rxlbcoxlt\mssqlserver01','master')
+#MainServer=server('Rxlbcoxlt\mssqlserver01','master')
 #Jacobs Test Function
 #MainServer=server('DESKTOP-LPJK5QO\SCHOOL', 'Legos')
 while 1:
@@ -41,10 +41,10 @@ while 1:
 	elif n == 2:
 		print("Employee's Offline Mode")
 		print("Please Sign In")
-		Uname = "Mr.Smith"
-		Pword = "password"
-		#Uname = input("UserName : ")		
-		#Pword = input("Password : ")
+		#Uname = "Mr.Smith"
+		#Pword = "password"
+		Uname = input("UserName : ")		
+		Pword = input("Password : ")
 		employee = Employee(MainServer, Uname, Pword)
 		
 
