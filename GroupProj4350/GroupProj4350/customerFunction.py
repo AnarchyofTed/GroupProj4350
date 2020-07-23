@@ -35,7 +35,7 @@ class Customer:
 			print("3. Sign Out")
 			userInput = int(input())
 			if userInput == 1:
-				PlaceOrder(self.username,server)
+				PlaceOrder(self.id,"NULL",server,self.preference)
 			elif userInput == 2:
 				History(self, server)
 			elif userInput ==3:

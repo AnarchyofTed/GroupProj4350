@@ -1,5 +1,11 @@
 from datetime import datetime
-def PlaceOrder(customerName,server):
+def PlaceOrder(customerName,employee,server,store):
+    if customerName != "NULL":
+        customerName=customerName[1:]
+    if store != "NULL":
+        store ="'"+store+"'"
+    if employee != "NULL":
+        employee=employee[1:]
     cart=list()
     cartIds=list()
     cost=0
@@ -12,15 +18,16 @@ def PlaceOrder(customerName,server):
         userInp = int(input())
         if userInp == 1:
             print("Browsing inventory")
-            print("item number, Price, Description, Amount in Stock")
+            #print("item number, Price, Description, Amount in Stock")
             row=server.command("SELECT  * FROM item")
             number=0
             processed=list()
             for x in row:
                 temp=str(x).split(",")
                 processed.append(temp)
-                print(str(number)+":   "+temp[1][10:-2]+" , "+temp[2]+" , "+temp[3][:-1])
+                print(str(number)+":   "+temp[2][2:-1]+", Quanity: "+temp[3][:-1]+", Price: "+temp[1][10:-2])
                 number=number+1
+            row
             Item=input("Do you want to add one of items to the order(Enter y for yes or n for no): ")
             while Item !='n':
                 tempItem=int(input("Enter the Item number you want to add: "))
@@ -59,20 +66,21 @@ def PlaceOrder(customerName,server):
             print(cart)
             print("Total Cost : "+str(cost))
         elif userInp ==4:
-            payment=input("Please enter a valid credit card number: ")
-            #payment="1111111111111111111111111111111111"
-            while len(str(payment))<16:
-                print("number was invalid")
+            if cart == []:
+                print("Cart is empty")
+            else:
                 payment=input("Please enter a valid credit card number: ")
-            StringCommand="INSERT INTO orders(customer_id, employee_id, store_id, order_date, order_price) VALUES("
-            customerInfo=server.command("SELECT * FROM customers WHERE customer_username= '%s'"% customerName)
-            for x in customerInfo:
-                customer=str(x).split(",")
-            #print(x)
-            StringCommand=StringCommand+customer[0][3:-1]+" ,NULL ,"+"(SELECT store_id FROM store WHERE store_name ="+customer[3]+") , '"+str(datetime.date(datetime.now()))+"' , "+str(cost)+");"
-            #print(StringCommand)
-            server.command(str(StringCommand))
-            server.command("COMMIT TRANSACTION")
+                #payment="1111111111111111111111111111111111"
+                while len(str(payment))<16:
+                    print("number was invalid")
+                    payment=input("Please enter a valid credit card number: ")
+                StringCommand="INSERT INTO orders(customer_id, employee_id, store_id, order_date, order_price) VALUES("
+            
+                StringCommand=StringCommand+customerName+" ,"+ employee+","+"(SELECT store_id FROM store WHERE store_name ="+store+") , '"+str(datetime.date(datetime.now()))+"' , "+str(cost)+");"
+                print(StringCommand)
+                server.command(str(StringCommand))
+                server.command("COMMIT TRANSACTION")
+                break
         elif userInp == 5:
             break
         else:

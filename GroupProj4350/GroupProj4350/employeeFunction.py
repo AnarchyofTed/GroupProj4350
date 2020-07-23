@@ -1,4 +1,5 @@
 from employeeSale import *
+from placeOrder import *
 from orderManagement import *
 from databaseManagement import *
 from reportManagement import *
@@ -48,7 +49,8 @@ class Employee:
 			try:
 				userInput = int(input())
 				if userInput == 1:
-					EmployeeSale(server, self)
+					PlaceOrder("NULL",self.id,server,self.preference)
+					#EmployeeSale(server, self)
 				elif userInput == 2:
 					OrderManagement()
 				elif userInput == 3:
