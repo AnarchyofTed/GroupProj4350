@@ -3,6 +3,7 @@ from orderManagement import *
 from databaseManagement import *
 from reportManagement import *
 from deliveryManagement import *
+import sys
 
 class Employee:
 	
@@ -47,7 +48,7 @@ class Employee:
 			try:
 				userInput = int(input())
 				if userInput == 1:
-					EmployeeSale(server)
+					EmployeeSale(server, self)
 				elif userInput == 2:
 					OrderManagement()
 				elif userInput == 3:
@@ -61,4 +62,5 @@ class Employee:
 				else:
 					print("Not an option!")
 			except:
-				print("Not an Option!")
+				 print("Unexpected error:", sys.exc_info()[0])
+				 raise
