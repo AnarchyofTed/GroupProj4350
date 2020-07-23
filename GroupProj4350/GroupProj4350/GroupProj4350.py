@@ -22,7 +22,7 @@ from Populate_Server import *
 ##Blakes Test Function
 MainServer=server('Rxlbcoxlt\mssqlserver01','master')
 #Jacobs Test Function
-#MainServer=server('DESKTOP-LPJK5QO\SCHOOL', 'Lego')
+#MainServer=server('DESKTOP-LPJK5QO\SCHOOL', 'Legos')
 while 1:
 	print("Please Sign In")
 	print("1. Customer (Online Mode)")
@@ -33,7 +33,7 @@ while 1:
 	if n == 1:
 		print("Welcome to Lego Store Online")
 		print("Please Sign In")
-		Uname = input("UserName : ")		
+		Uname = input("UserName : ")
 		Pword = input("Password : ")
 		customer = Customer(MainServer, Uname, Pword)
 
