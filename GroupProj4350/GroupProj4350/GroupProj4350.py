@@ -10,7 +10,7 @@ while t==0:
 	databaseName=input('Enter a valid database name: ')
 
 	try:
-		self.serverObject = pypyodbc.connect('Driver={SQL Server};'
+		serverObject = pypyodbc.connect('Driver={SQL Server};'
                                             'Server='+serverName+';'
                                             'Database='+databaseName+';'
                                             'Trusted_Connection=yes;')
