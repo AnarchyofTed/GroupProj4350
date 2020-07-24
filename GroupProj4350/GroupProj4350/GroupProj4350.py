@@ -6,16 +6,20 @@ from Populate_Server import *
 from addRevenue import *
 
 t=0
-while t==0:
-	serverName= input('Enter the server name: ')
-	databaseName=input('Enter a valid database name: ')
 
-	try:
-		MainServer=server(serverName, databaseName)
-		t=1
-	except:
-		print("could not connect")
-		t=0
+#while t==0:
+#	serverName= input('Enter the server name: ')
+#	databaseName=input('Enter a valid database name: ')
+
+#	try:
+#		MainServer=server(serverName, databaseName)
+#		t=1
+#	except:
+#		print("could not connect")
+#		t=0
+serverName='DESKTOP-LPJK5QO\SCHOOL'
+databaseName='Legos'
+MainServer=server('DESKTOP-LPJK5QO\SCHOOL', 'Legos')
 first=input("Do you need to create the tables for the first time?y for yes, n for no: ")
 if first=='y' or first=='Y':
 	MakeDataBase(serverName,databaseName)
@@ -23,7 +27,7 @@ if first=='y' or first=='Y':
 ##Blakes Test Function
 #MainServer=server('Rxlbcoxlt\mssqlserver01','LEGO')
 #Jacobs Test Function
-#MainServer=server('DESKTOP-LPJK5QO\SCHOOL', 'Legos')
+
 while 1:
 	print("Please Sign In")
 	print("1. Customer (Online Mode)")
@@ -34,10 +38,10 @@ while 1:
 	if n == 1:
 		print("Welcome to Lego Store Online")
 		print("Please Sign In")
-		#Uname = "MrBlake123"
-		#Pword = "123456"
-		Uname = input("UserName : ")
-		Pword = input("Password : ")
+		Uname = "MrBlake123"
+		Pword = "123456"
+		#Uname = input("UserName : ")
+		#Pword = input("Password : ")
 		customer = Customer(MainServer, Uname, Pword)
 
 
