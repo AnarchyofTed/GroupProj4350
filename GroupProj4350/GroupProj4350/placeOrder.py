@@ -1,4 +1,5 @@
 from datetime import datetime
+from addRevenue import *
 def PlaceOrder(customerName,employee,server,store):
     if customerName != "NULL":
         customerName=customerName[1:]
@@ -6,15 +7,13 @@ def PlaceOrder(customerName,employee,server,store):
         store ="'"+store+"'"
     if employee != "NULL":
         employee=employee[1:]
-from addRevenue import *
-def PlaceOrder(customerName,server):
     cart=list()
     cartIds=list()
     cost=0
     while 1:     
         print("1. Browse Inventory")
         print("2. Search Inventory")
-        print("3. View Cart")
+        print("3. Veiw Cart")
         print("4. Check Out")
         print("5. Go Back")
         userInp = int(input())
@@ -30,6 +29,7 @@ def PlaceOrder(customerName,server):
                 print(str(number)+":   "+temp[2][2:-1]+", Quanity: "+temp[3][:-1]+", Price: "+temp[1][10:-2])
                 number=number+1
             row
+            print("-------------------------------------")
             Item=input("Do you want to add one of items to the order(Enter y for yes or n for no): ")
             while Item !='n':
                 tempItem=int(input("Enter the Item number you want to add: "))
@@ -40,8 +40,11 @@ def PlaceOrder(customerName,server):
                         cost=round(cost, 2)
                         cartIds.append(temp[0])
                         cart.append(temp[2])
+                        print(f"({temp[2]} - {temp[3]} -- ${cost}")
+                        print("Item Added to Cart")
                     else:
                         print("Sorry the Item is out of stock")
+                        print("-------------------------------------")
                 Item=input("Do you want to add another item to the order(Enter y for yes or n for no): ")
         elif userInp == 2:
             print("Search Inv")
@@ -65,24 +68,30 @@ def PlaceOrder(customerName,server):
                     cart.append(temp[2])
                     
         elif userInp == 3:
+            print("-------------------------------------")
             print(cart)
+            print("-------------------------------------")
             print("Total Cost : "+str(cost))
         elif userInp ==4:
-            #payment=input("Please enter a valid credit card number: ")
-            payment="1111111111111111111111111111111111"
-            while len(str(payment))<16:
-                print("number was invalid")
-                payment=input("Please enter a valid credit card number: ")
-            StringCommand="INSERT INTO orders(customer_id, employee_id, store_id, order_date, order_price) VALUES("
-            customerInfo=server.command("SELECT * FROM customers WHERE customer_username= '%s'"% customerName)
-            for x in customerInfo:
-                customer=str(x).split(",")
-            #print(x)
-            StringCommand=StringCommand+customer[0][3:-1]+" ,NULL ,"+"(SELECT store_id FROM store WHERE store_name ="+customer[3]+") , '"+str(datetime.date(datetime.now()))+"' , "+str(cost)+");"
-            #print(StringCommand)
-            server.command(str(StringCommand))
-            server.command("COMMIT TRANSACTION")
-            addRevenue(cost, server, customer[2], bool(1))
+            if cart == []:
+                print("Cart is empty")
+            else:
+               # payment=input("Please enter a valid credit card number: ")
+                payment="1111111111111111111111111111111111"
+                while len(str(payment))<16:
+                    print("number was invalid")
+                    payment=input("Please enter a valid credit card number: ")
+                StringCommand="INSERT INTO orders(customer_id, employee_id, store_id, order_date, order_price) VALUES("
+            
+                StringCommand=StringCommand+customerName+" ,"+ employee+","+"(SELECT store_id FROM store WHERE store_name ="+store+") , '"+str(datetime.date(datetime.now()))+"' , "+str(cost)+");"
+               # print(StringCommand)
+                server.command(str(StringCommand))   
+                server.command("COMMIT TRANSACTION")
+                addRevenue(cost, server, store)
+                if employee != "NULL":
+                    addSales(cost, server, employee)
+                print("Have Fun!")
+                break
         elif userInp == 5:
             break
         else:

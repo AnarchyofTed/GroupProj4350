@@ -21,7 +21,7 @@ from addRevenue import *
 #	MakeDataBase(serverName,databaseName)
 	
 ##Blakes Test Function
-MainServer=server('Rxlbcoxlt\mssqlserver01','master')
+MainServer=server('Rxlbcoxlt\mssqlserver01','LEGO')
 #Jacobs Test Function
 #MainServer=server('DESKTOP-LPJK5QO\SCHOOL', 'Legos')
 while 1:
