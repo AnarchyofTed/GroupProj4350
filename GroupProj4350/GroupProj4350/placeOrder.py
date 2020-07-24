@@ -14,13 +14,12 @@ def PlaceOrder(customerName,employee,server,store):
     while 1:     
         print("1. Browse Inventory")
         print("2. Search Inventory")
-        print("3. Veiw Cart")
+        print("3. View Cart")
         print("4. Check Out")
         print("5. Go Back")
         userInp = int(input())
         if userInp == 1:
             print("Browsing inventory")
-            #print("item number, Price, Description, Amount in Stock")
             row=server.command("SELECT  * FROM item")
             number=0
             processed=list()
@@ -31,8 +30,8 @@ def PlaceOrder(customerName,employee,server,store):
                 tempQuan=temp[3][:-1]
                 tempPrice=temp[1][10:-2]
                 temp=[tempId,tempPrice,tempDescrip,tempQuan]
-                processed.append(temp)
-                print(str(number)+":   "+tempDescrip+", Quanity: "+tempQuan+", Price: "+tempPrice)
+                processed.append(temp)               
+                print(f"{number}) {tempDescrip} - {tempQuan} -- ${tempPrice}")
                 number=number+1
             row=server.command("SELECT * FROM full_set")
             holder=list()
@@ -40,14 +39,12 @@ def PlaceOrder(customerName,employee,server,store):
                 temp=str(x).split(",")
                 temp[0]=temp[0][4:-2]
                 temp[1]=temp[1][2:-2]
-                print(temp)
                 holder.append(temp)  
             for x in holder:
                
                 row=server.command("SELECT * FROM set_item WHERE set_id='"+x[0]+"';")
                 tempIdAndCount=list()
-                for y in row:
-                    #print(str(y[1][2:-1])+"   "+str(y[2]))
+                for y in row:                   
                     tempIdAndCount.append((str(y[1][2:-1]),y[2]))
                 total=0
                 for y in tempIdAndCount:
@@ -60,7 +57,7 @@ def PlaceOrder(customerName,employee,server,store):
                         t3=float(t3)
                     total=total+(t3*t2)
                     total=round(total, 2)
-                print(str(number)+":   "+x[1]+", Price: "+str(total))
+                print(f"({number}) - {x[1]} -- ${total}")
                 tempAll=[x[0],total,x[1],2]
                 processed.append(tempAll)
                 number=number+1
@@ -111,41 +108,44 @@ def PlaceOrder(customerName,employee,server,store):
             if cart == []:
                 print("Cart is empty")
             else:
-                while 1:
-                    print("1: Master Card")
-                    print("2: Visa")
-                    if employee != 'NULL':
-                        print("3: Cash")
-                    print("4: Go Back")
-                    menu=int(input())
-                    card=""
-                    if menu == 1 or menu == 2:
-                        if menu == 2:
-                            card = "'visa'"
-                        if menu == 1:
-                            card="'mc'"
-                        #payment=input("Please enter a valid credit card number: ")
-                        payment="1111111111111111111111111111111111"
-                        while len(str(payment))<16:
-                            print("number was invalid")
-                            payment=input("Please enter a valid credit card number: ")
-                    if menu == 3:
-                        card="'cash'"
-                    if menu == 4:
-                        break
+                if customerName == 'NULL' and employee == 'NULL':
+                    print("Order has been placed!")
+                else:
+                    while 1:
+                        print("1: Master Card")
+                        print("2: Visa")
+                        if employee != 'NULL':
+                            print("3: Cash")
+                        print("4: Go Back")
+                        menu=int(input())
+                        card=""
+                        if menu == 1 or menu == 2:
+                            if menu == 2:
+                                card = "'visa'"
+                            if menu == 1:
+                                card="'mc'"
+                            #payment=input("Please enter a valid credit card number: ")
+                            payment="1111111111111111111111111111111111"
+                            while len(str(payment))<16:
+                                print("number was invalid")
+                                payment=input("Please enter a valid credit card number: ")
+                        if menu == 3:
+                            card="'cash'"
+                        if menu == 4:
+                            break
                   
-                    StringCommand="INSERT INTO orders(customer_id, employee_id, store_id, order_date, order_price,payment_type, delivery_date, active) VALUES("
+                        StringCommand="INSERT INTO orders(customer_id, employee_id, store_id, order_date, order_price,payment_type, delivery_date, active) VALUES("
                     
-                    nowDate=str(datetime.date(datetime.now())+timedelta(days=10))
-                    StringCommand=StringCommand+customerName+" ,"+ employee+","+"(SELECT store_id FROM store WHERE store_name ="+store+") , '"+str(datetime.date(datetime.now()))+"' , "+str(cost)+", "+card+", '"+nowDate+"', 'yes');"
-                    # print(StringCommand)
-                    server.command(str(StringCommand))   
-                    server.command("COMMIT TRANSACTION")
-                    addRevenue(cost, server, store)
-                    if employee != "NULL":
-                        addSales(cost, server, employee)
-                    print("Have Fun!")
-                    break
+                        nowDate=str(datetime.date(datetime.now())+timedelta(days=10))
+                        StringCommand=StringCommand+customerName+" ,"+ employee+","+"(SELECT store_id FROM store WHERE store_name ="+store+") , '"+str(datetime.date(datetime.now()))+"' , "+str(cost)+", "+card+", '"+nowDate+"', 'yes');"
+                        # print(StringCommand)
+                        server.command(str(StringCommand))   
+                        server.command("COMMIT TRANSACTION")
+                        addRevenue(cost, server, store)
+                        if employee != "NULL":
+                            addSales(cost, server, employee)
+                        print("Have Fun!")
+                        break
                    
         elif userInp == 5:
             break

@@ -49,10 +49,12 @@ class Employee:
 			try:
 				userInput = int(input())
 				if userInput == 1:
-					PlaceOrder("NULL",self.id,server,self.preference)
-					#EmployeeSale(server, self)
+					PlaceOrder("NULL",self.id,server,self.preference)		
 				elif userInput == 2:
-					OrderManagement()
+					if self.accessLevel == 2:
+						OrderManagement(server, self.preference)
+					else:
+						print("You dont have the right credentials for this section!")
 				elif userInput == 3:
 					DatabaseManagement()
 				elif userInput == 4:
