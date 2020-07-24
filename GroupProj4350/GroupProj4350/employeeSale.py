@@ -80,7 +80,7 @@ def BrowseCatalog(s, e):
                      storestring ='%s' % store[0]
                      storestring = storestring[1:]
                      s.sqlInsert("INSERT INTO orders (employee_id, store_id, order_date, order_price) VALUES(%s, %s, '%s', %f)" %(thisstring, storestring, formatted_date, o))
-
+                     addSales(o, s,thisstring)
                      break
                  if n == 2:
                      print("Enjoy your Lego")

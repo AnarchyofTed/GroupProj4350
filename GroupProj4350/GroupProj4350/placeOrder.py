@@ -1,4 +1,5 @@
 from datetime import datetime
+from addRevenue import *
 def PlaceOrder(customerName,employee,server,store):
     if customerName != "NULL":
         customerName=customerName[1:]
@@ -28,6 +29,7 @@ def PlaceOrder(customerName,employee,server,store):
                 print(str(number)+":   "+temp[2][2:-1]+", Quanity: "+temp[3][:-1]+", Price: "+temp[1][10:-2])
                 number=number+1
             row
+            print("-------------------------------------")
             Item=input("Do you want to add one of items to the order(Enter y for yes or n for no): ")
             while Item !='n':
                 tempItem=int(input("Enter the Item number you want to add: "))
@@ -38,8 +40,11 @@ def PlaceOrder(customerName,employee,server,store):
                         cost=round(cost, 2)
                         cartIds.append(temp[0])
                         cart.append(temp[2])
+                        print(f"({temp[2]} - {temp[3]} -- ${cost}")
+                        print("Item Added to Cart")
                     else:
                         print("Sorry the Item is out of stock")
+                        print("-------------------------------------")
                 Item=input("Do you want to add another item to the order(Enter y for yes or n for no): ")
         elif userInp == 2:
             print("Search Inv")
@@ -63,7 +68,9 @@ def PlaceOrder(customerName,employee,server,store):
                     cart.append(temp[2])
                     
         elif userInp == 3:
+            print("-------------------------------------")
             print(cart)
+            print("-------------------------------------")
             print("Total Cost : "+str(cost))
         elif userInp ==4:
             if cart == []:
@@ -77,9 +84,13 @@ def PlaceOrder(customerName,employee,server,store):
                 StringCommand="INSERT INTO orders(customer_id, employee_id, store_id, order_date, order_price) VALUES("
             
                 StringCommand=StringCommand+customerName+" ,"+ employee+","+"(SELECT store_id FROM store WHERE store_name ="+store+") , '"+str(datetime.date(datetime.now()))+"' , "+str(cost)+");"
-                print(StringCommand)
-                server.command(str(StringCommand))
+               # print(StringCommand)
+                server.command(str(StringCommand))   
                 server.command("COMMIT TRANSACTION")
+                addRevenue(cost, server, store)
+                if employee != "NULL":
+                    addSales(cost, server, employee)
+                print("Have Fun!")
                 break
         elif userInp == 5:
             break
