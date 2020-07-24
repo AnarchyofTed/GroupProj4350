@@ -76,8 +76,8 @@ def PlaceOrder(customerName,employee,server,store):
             if cart == []:
                 print("Cart is empty")
             else:
-               # payment=input("Please enter a valid credit card number: ")
-                payment="1111111111111111111111111111111111"
+                payment=input("Please enter a valid credit card number: ")
+                #payment="1111111111111111111111111111111111"
                 while len(str(payment))<16:
                     print("number was invalid")
                     payment=input("Please enter a valid credit card number: ")
