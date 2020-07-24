@@ -1,8 +1,10 @@
 from employeeSale import *
+from placeOrder import *
 from orderManagement import *
 from databaseManagement import *
 from reportManagement import *
 from deliveryManagement import *
+import sys
 
 class Employee:
 	
@@ -19,7 +21,7 @@ class Employee:
 
 
 	def EmployeeLogin(self, server):
-		emp = server.sqlSelect("SELECT * FROM employees")# WHERE employee_username= '%s'"% self.username)
+		emp = server.sqlSelect("SELECT * FROM employees WHERE employee_username= '%s'"% self.username)
 		emp = emp.fetchone()
 		if emp is None:
 			print("Invalid Username")
@@ -44,18 +46,23 @@ class Employee:
 			print("4. Report Management")
 			print("5. Delivery Management")
 			print("6. Sign Out")
-			userInput = int(input())
-			if userInput == 1:
-				EmployeeSale()
-			elif userInput == 2:
-				OrderManagement()
-			elif userInput == 3:
-				DatabaseManagement()
-			elif userInput == 4:
-				ReportManagement()
-			elif userInput == 5:
-				DeliveryManagement()
-			elif userInput == 6:
-				break
-			else:
-				print("Not an option!")
+			try:
+				userInput = int(input())
+				if userInput == 1:
+					PlaceOrder("NULL",self.id,server,self.preference)
+					#EmployeeSale(server, self)
+				elif userInput == 2:
+					OrderManagement()
+				elif userInput == 3:
+					DatabaseManagement()
+				elif userInput == 4:
+					ReportManagement()
+				elif userInput == 5:
+					DeliveryManagement()
+				elif userInput == 6:
+					break
+				else:
+					print("Not an option!")
+			except:
+				 print("Unexpected error:", sys.exc_info()[0])
+				 raise
