@@ -1,4 +1,11 @@
 from datetime import datetime
+def PlaceOrder(customerName,employee,server,store):
+    if customerName != "NULL":
+        customerName=customerName[1:]
+    if store != "NULL":
+        store ="'"+store+"'"
+    if employee != "NULL":
+        employee=employee[1:]
 from addRevenue import *
 def PlaceOrder(customerName,server):
     cart=list()
@@ -13,15 +20,16 @@ def PlaceOrder(customerName,server):
         userInp = int(input())
         if userInp == 1:
             print("Browsing inventory")
-            print("item number, Price, Description, Amount in Stock")
+            #print("item number, Price, Description, Amount in Stock")
             row=server.command("SELECT  * FROM item")
             number=0
             processed=list()
             for x in row:
                 temp=str(x).split(",")
                 processed.append(temp)
-                print(str(number)+":   "+temp[1][10:-2]+" , "+temp[2]+" , "+temp[3][:-1])
+                print(str(number)+":   "+temp[2][2:-1]+", Quanity: "+temp[3][:-1]+", Price: "+temp[1][10:-2])
                 number=number+1
+            row
             Item=input("Do you want to add one of items to the order(Enter y for yes or n for no): ")
             while Item !='n':
                 tempItem=int(input("Enter the Item number you want to add: "))
