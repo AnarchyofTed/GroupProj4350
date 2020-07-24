@@ -1,4 +1,5 @@
 from datetime import datetime
+from addRevenue import *
 def PlaceOrder(customerName,server):
     cart=list()
     cartIds=list()
@@ -6,7 +7,7 @@ def PlaceOrder(customerName,server):
     while 1:     
         print("1. Browse Inventory")
         print("2. Search Inventory")
-        print("3. Veiw Cart")
+        print("3. View Cart")
         print("4. Check Out")
         print("5. Go Back")
         userInp = int(input())
@@ -59,8 +60,8 @@ def PlaceOrder(customerName,server):
             print(cart)
             print("Total Cost : "+str(cost))
         elif userInp ==4:
-            payment=input("Please enter a valid credit card number: ")
-            #payment="1111111111111111111111111111111111"
+            #payment=input("Please enter a valid credit card number: ")
+            payment="1111111111111111111111111111111111"
             while len(str(payment))<16:
                 print("number was invalid")
                 payment=input("Please enter a valid credit card number: ")
@@ -73,6 +74,7 @@ def PlaceOrder(customerName,server):
             #print(StringCommand)
             server.command(str(StringCommand))
             server.command("COMMIT TRANSACTION")
+            addRevenue(cost, server, customer[2], bool(1))
         elif userInp == 5:
             break
         else:
