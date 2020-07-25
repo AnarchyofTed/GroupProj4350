@@ -1,7 +1,8 @@
 from datetime import date
 import sys
 
-
+###########THIS IS OLD CODE AND IS NOT USED################
+##here for if we decided to use it again
 def EmployeeSale(server, emp):
     while 1:
         print("---Sales Page---")

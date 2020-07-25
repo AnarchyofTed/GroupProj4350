@@ -1,3 +1,6 @@
+
+###Some support functions for if we decide to use them
+
 def addRevenue(amount, server, store): 
     totrev = server.sqlSelect("SELECT store_sales FROM store WHERE store_name = %s;"%store) 
     totrev = totrev.fetchone()

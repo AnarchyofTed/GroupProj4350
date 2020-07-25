@@ -14,6 +14,7 @@ def DeliveryManagement(server):
             continue
         if n==3:
             break
+        #This grabes a table that is a join of orders, customers, employees, and store
         if n==1:
             row=server.command("SELECT order_id, customer_name, employee_name, store_name, order_date, order_price, payment_type, delivery_date, active  FROM  ((orders LEFT JOIN customers ON orders.customer_id=customers.customer_id) LEFT JOIN employees ON orders.employee_id=employees.employee_id) LEFT JOIN store ON orders.store_id=store.store_id WHERE active='yes';")
         if n==2:
@@ -21,6 +22,7 @@ def DeliveryManagement(server):
         print("----------------------------------------------")
         holder=list()
         number=0
+        #Formats results from table
         for x in row:
             temp=str(x).split(",")
             #order ID
@@ -67,6 +69,7 @@ def DeliveryManagement(server):
                 print("Please enter a valid number")
                 continue
             else:
+                #Menu to edit the orders
                 while 1:
                     print("which item do you want to edit")
                     temp=holder[m]
@@ -81,6 +84,7 @@ def DeliveryManagement(server):
                     except:
                         print("Please enter a valid option")
                         continue
+                    #All the updates
                     if t==1:
                         date=str(input("Enter date in the format year(last 2 digits), month, day   **/**/**: "))
                         date=datetime.strptime(date, "%y/%m/%d")

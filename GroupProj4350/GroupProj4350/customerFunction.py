@@ -2,7 +2,7 @@ from placeOrder import *
 from history import *
 
 class Customer:
-	
+	#This stores the customer infomation client side
 	def __init__(self,server, uname, pword):
 		self.id=''
 		self.name =''
@@ -11,7 +11,7 @@ class Customer:
 		self.username=uname
 		self.password=pword
 		self.CustomerLogin(server)
-
+	#This validates the login informatino
 	def CustomerLogin(self, server):
 		cust = server.sqlSelect("SELECT * FROM customers WHERE customer_username= '%s'"% self.username)
 		cust = cust.fetchone()
@@ -27,6 +27,8 @@ class Customer:
 			self.phone=str(cust[2])
 			self.signedIn(server)
 		
+
+	#This is the customer menu
 	def signedIn(self, server):
 		while 1:
 			print("---Customer Menu---")
@@ -34,6 +36,7 @@ class Customer:
 			print("2. History")
 			print("3. Sign Out")
 			userInput = input()
+			#Check for valid menu inputs
 			try:
 				userInput=int(userInput)
 			except:

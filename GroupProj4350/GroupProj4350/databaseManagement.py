@@ -1,11 +1,17 @@
+
+#This is used for generalizing updates to the server
 def UpdateServer(server, table, field, newItem, ID, SpecificId):
     InsertString="UPDATE "+table+" SET "+field+"='"+newItem+"' WHERE "+ID+"='"+SpecificId+"';"
     #print(InsertString)
     server.command(InsertString)
     server.command("COMMIT TRANSACTION")
 
+
+
 def DatabaseManagement(server, access):
     print("This is Database Management")
+
+    #This checks if the employee has an valid access level
     if access<2:
         print("Not high enough access level")
         return
@@ -25,10 +31,12 @@ def DatabaseManagement(server, access):
         if n==3:
             break
         if n==2:
+            #Pulls the employee table
             row=server.command("SELECT * FROM employees")
             number=0
             holder=list()
             for x in row:
+                #Formats table
                 temp=str(x).split(",")
                 #ID
                 temp[0]=temp[0][4:-2]
@@ -37,7 +45,7 @@ def DatabaseManagement(server, access):
                 #Username
                 temp[2]=temp[2][2:-1]
                 #password
-                temp[3]=temp[3][2:-1]
+                temp[3]=""
                 #Store
                 temp[4]=temp[4][2:-1]
                 #access
@@ -45,6 +53,7 @@ def DatabaseManagement(server, access):
                 #phone
                 temp[7]=temp[7][2:-2]
                 print(str(number)+":   "+str(temp[1:]))
+                #Stores each row of the table locally
                 holder.append(temp)
                 number=number+1
             while 1:
@@ -59,7 +68,9 @@ def DatabaseManagement(server, access):
                 if m>number:
                     print("please enter a valid input")
                     continue
+                #Menu for the employees
                 while 1:
+                    #Grabs employee Id
                     Id=holder[m][0]
                     print("What do you want to edit")
                     print("1: Name")
@@ -70,6 +81,7 @@ def DatabaseManagement(server, access):
                     print("6: Phone Number")
                     print("7: Go Back")
                     t=input()
+                    #This are used to changes the paramaters of the update function
                     ServerInput=''
                     WhatToChange=''
                     try:
@@ -108,6 +120,7 @@ def DatabaseManagement(server, access):
             row=server.command("SELECT * FROM customers")
             number=0
             holder=list()
+            #Formates customers
             for x in row:
                 temp=str(x).split(",")
                 temp[0]=temp[0][4:-2]
@@ -115,7 +128,7 @@ def DatabaseManagement(server, access):
                 temp[2]=temp[2][2:-1]
                 temp[3]=temp[3][2:-1]
                 temp[4]=temp[4][2:-1]
-                temp[5]=temp[5][2:-2]
+                temp[5]=""
                 print(str(number)+":   "+str(temp[1:]))
                 holder.append(temp)
                 number=number+1
@@ -131,6 +144,7 @@ def DatabaseManagement(server, access):
                 if m>number:
                     print("please enter a valid input")
                     continue
+                #All most a repeat of the employee menus
                 while 1:
                     Id=holder[m][0]
                     print("What do you want to edit")
