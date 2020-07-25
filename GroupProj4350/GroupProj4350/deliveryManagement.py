@@ -91,7 +91,7 @@ def DeliveryManagement(server):
                         row=server.command("UPDATE orders SET payment_type='"+pay+"' WHERE order_id='"+temp[0]+"';")
                         row=server.command("COMMIT TRANSACTION")
                     elif t==3:
-                        row=server.command("UPDATE orders SET active='no' WHERE order_id='"+temp[0]+"';")
+                        row=server.command("UPDATE orders SET active='can' WHERE order_id='"+temp[0]+"';")
                         row=server.command("COMMIT TRANSACTION")
                         print("Order was cancelled")
                     elif t==4:

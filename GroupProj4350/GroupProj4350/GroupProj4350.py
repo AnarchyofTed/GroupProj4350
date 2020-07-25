@@ -21,7 +21,7 @@ while t==0:
 ###Blakes Test ###
 #serverName='RXLBCOXLT\BLAKESMSQLSERVER'
 #databaseName='Lego'
-MainServer=server(serverName, databaseName)
+#MainServer=server(serverName, databaseName)
 first=input("Do you need to create the tables for the first time?y for yes, n for no: ")
 if first=='y' or first=='Y':
 	MakeDataBase(serverName,databaseName)

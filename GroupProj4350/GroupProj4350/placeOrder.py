@@ -17,7 +17,12 @@ def PlaceOrder(customerName,employee,server,store):
         print("3. View Cart")
         print("4. Check Out")
         print("5. Go Back")
-        userInp = int(input())
+        userInp = input()
+        try:
+            userInp=int(userInp)
+        except:
+            print("Please enter a valid option")
+            continue
         if userInp == 1:
             print("Browsing inventory")
             row=server.command("SELECT  * FROM item")
@@ -64,7 +69,12 @@ def PlaceOrder(customerName,employee,server,store):
             print("-------------------------------------")
             Item=input("Do you want to add one of items to the order(Enter y for yes or n for no): ")
             while Item !='n':
-                tempItem=int(input("Enter the Item number you want to add: "))
+                tempItem=input("Enter the Item number you want to add: ")
+                try:
+                    tempItem=int(tempItem)
+                except:
+                    print("Please enter a valid option")
+                    continue
                 if tempItem < number:
                     temp=processed[tempItem]
                     if int(temp[3]) > 0:
@@ -117,15 +127,20 @@ def PlaceOrder(customerName,employee,server,store):
                         if employee != 'NULL':
                             print("3: Cash")
                         print("4: Go Back")
-                        menu=int(input())
+                        menu=input()
+                        try:
+                            menu=int(menu)
+                        except:
+                            print("Please enter a valid option")
+                            continue
                         card=""
                         if menu == 1 or menu == 2:
                             if menu == 2:
                                 card = "'visa'"
                             if menu == 1:
                                 card="'mc'"
-                            #payment=input("Please enter a valid credit card number: ")
-                            payment="1111111111111111111111111111111111"
+                            payment=input("Please enter a valid credit card number: ")
+                            #payment="1111111111111111111111111111111111"
                             while len(str(payment))<16:
                                 print("number was invalid")
                                 payment=input("Please enter a valid credit card number: ")

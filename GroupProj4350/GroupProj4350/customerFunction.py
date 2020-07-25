@@ -33,7 +33,12 @@ class Customer:
 			print("1. Place an Order")
 			print("2. History")
 			print("3. Sign Out")
-			userInput = int(input())
+			userInput = input()
+			try:
+				userInput=int(userInput)
+			except:
+				print("Please enter a valid option")
+				continue
 			if userInput == 1:
 				PlaceOrder(self.id,"NULL",server,self.preference)
 			elif userInput == 2:

@@ -47,7 +47,12 @@ class Employee:
 			print("5. Delivery Management")
 			print("6. Sign Out")
 			try:
-				userInput = int(input())
+				userInput = input()
+				try:
+					userInput=int(userInput)
+				except:
+					print("Please enter a valid option")
+					continue
 				if userInput == 1:
 					PlaceOrder("NULL",self.id,server,self.preference)		
 				elif userInput == 2:
@@ -58,7 +63,7 @@ class Employee:
 				elif userInput == 3:
 					DatabaseManagement(server,self.accessLevel)
 				elif userInput == 4:
-					ReportManagement()
+					ReportManagement(server)
 				elif userInput == 5:
 					DeliveryManagement(server)
 				elif userInput == 6:
