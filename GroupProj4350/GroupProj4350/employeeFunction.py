@@ -56,7 +56,7 @@ class Employee:
 					else:
 						print("You dont have the right credentials for this section!")
 				elif userInput == 3:
-					DatabaseManagement()
+					DatabaseManagement(server,self.accessLevel)
 				elif userInput == 4:
 					ReportManagement()
 				elif userInput == 5:

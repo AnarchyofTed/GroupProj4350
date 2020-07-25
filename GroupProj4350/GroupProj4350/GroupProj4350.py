@@ -8,10 +8,10 @@ from addRevenue import *
 t=0
 
 while t==0:
-	#serverName= input('Enter the server name: ')
-	serverName="DESKTOP-LPJK5QO\SCHOOL"
-	#databaseName=input('Enter a valid database name: ')
-	databaseName="Legos"
+	serverName= input('Enter the server name: ')
+	#serverName="DESKTOP-LPJK5QO\SCHOOL"
+	databaseName=input('Enter a valid database name: ')
+	#databaseName="Legos"
 	try:
 		MainServer=server(serverName, databaseName)
 		t=1
@@ -44,20 +44,20 @@ while 1:
 	if n == 1:
 		print("Welcome to Lego Store Online")
 		print("Please Sign In")
-		Uname = "MrBlake123"
-		Pword = "123456"
-		#Uname = input("UserName : ")
-		#Pword = input("Password : ")
+		#Uname = "MrBlake123"
+		#Pword = "123456"
+		Uname = input("UserName : ")
+		Pword = input("Password : ")
 		customer = Customer(MainServer, Uname, Pword)
 
 
 	elif n == 2:
 		print("Employee's Offline Mode")
 		print("Please Sign In")
-		Uname = "Mr.Potter"
-		Pword = "password1"
-		#Uname = input("UserName : ")		
-		#Pword = input("Password : ")
+		#Uname = "Mr.Potter"
+		#Pword = "password1"
+		Uname = input("UserName : ")		
+		Pword = input("Password : ")
 		employee = Employee(MainServer, Uname, Pword)
 		
 
