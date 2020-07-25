@@ -8,9 +8,10 @@ from addRevenue import *
 t=0
 
 while t==0:
-	serverName= input('Enter the server name: ')
-	databaseName=input('Enter a valid database name: ')
-
+	#serverName= input('Enter the server name: ')
+	serverName="DESKTOP-LPJK5QO\SCHOOL"
+	#databaseName=input('Enter a valid database name: ')
+	databaseName="Legos"
 	try:
 		MainServer=server(serverName, databaseName)
 		t=1
@@ -34,7 +35,12 @@ while 1:
 	print("2. Employee (Store Mode)")
 	print("3. Create New Customer (New Employees must be created by management)")
 	print("4. Exit")
-	n = int(input())
+	n = input()
+	try:
+		n=int(n)
+	except:
+		print("Please enter a valid option")
+		continue
 	if n == 1:
 		print("Welcome to Lego Store Online")
 		print("Please Sign In")

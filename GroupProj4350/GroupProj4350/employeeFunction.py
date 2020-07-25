@@ -60,7 +60,7 @@ class Employee:
 				elif userInput == 4:
 					ReportManagement()
 				elif userInput == 5:
-					DeliveryManagement()
+					DeliveryManagement(server)
 				elif userInput == 6:
 					break
 				else:
